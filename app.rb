@@ -10,7 +10,6 @@ Dotenv.load
 
 tmp_loc = ENV["TMP_LOC"]
 git_repo_url = ENV["GIT_REPO_URL"]
-git_repo_name = ENV["GIT_REPO_NAME"]
 git_user_name = ENV["GIT_USER_NAME"]
 git_user_password = ENV["GIT_USER_PASSWORD"]
 git_user_email = ENV["GIT_USER_EMAIL"]
