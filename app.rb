@@ -52,6 +52,10 @@ def download_dropbox(d, dropbox_folder, path)
   return files
 end
 
+get "/hook/dropbox" do
+  params["challenge"]
+end
+
 post "/hook/dropbox" do
 
   tmp_repo_path = tmp_loc + "repo-" + SecureRandom.uuid()
