@@ -52,7 +52,7 @@ def download_dropbox(d, dropbox_folder, path)
   return files
 end
 
-get "/hook/dropbox" do
+post "/hook/dropbox" do
 
   tmp_repo_path = tmp_loc + "repo-" + SecureRandom.uuid()
   FileUtils.rm_rf(tmp_repo_path)
@@ -85,7 +85,7 @@ get "/hook/dropbox" do
 
 end
 
-get "/hook/github" do
+post "/hook/github" do
 
   tmp_repo_path = tmp_loc + "repo-" + SecureRandom.uuid()
   FileUtils.rm_rf(tmp_repo_path)
