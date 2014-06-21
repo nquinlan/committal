@@ -3,6 +3,7 @@ require "uri"
 require "git"
 require "fileutils"
 require "dropbox_sdk"
+require "httparty"
 
 require "dotenv"
 Dotenv.load
@@ -80,8 +81,30 @@ post "/hook/dropbox" do
     begin
       g.commit(message)
       g.push
-    rescue
+    rescue Exception => e
+      puts "Error: #{e.message}"
       # File a github issue
+      github_api_url_parsed = URI.parse(git_repo_url_authed)
+      github_api_url_parsed.host = "api.github.com"
+      github_api_url_parsed.host = "api-github-com-0y4a9jhnx1jt.runscope.net"
+      github_api_url_parsed.path = "/repos" + github_api_url_parsed.path.gsub(/\.git$/, "") + "/issues"
+      github_api_url = github_api_url_parsed.to_s
+
+      HTTParty.post(github_api_url, {
+        body: {
+            title: "[failure] automatic dropbox update #{Time.now.to_s}",
+            body: "```sh\n" + e.message + "```",
+            labels: "generated"
+        }.to_json,
+        headers: {
+          "User-Agent" => "Committal",
+          "Content-Type" => "application/json"
+        },
+        basic_auth: {
+          username: github_api_url_parsed.user,
+          password: github_api_url_parsed.password
+        }
+      })
     end
   end
 

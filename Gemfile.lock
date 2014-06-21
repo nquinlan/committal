@@ -7,7 +7,11 @@ GEM
     dropbox-sdk (1.6.4)
       json
     git (1.2.7)
+    httparty (0.12.0)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     json (1.8.1)
+    multi_xml (0.5.5)
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
@@ -24,4 +28,5 @@ DEPENDENCIES
   dotenv
   dropbox-sdk
   git
+  httparty
   sinatra
