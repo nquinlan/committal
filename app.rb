@@ -126,6 +126,15 @@ post "/hook/github" do
     changed_files.push(files["/" + file[0]])
   end
 
+  g.ls_files.each do |path, file|
+    if !files["/" + path]
+      file["revision"] = 0
+      file["rev"] = nil
+      file["path"] = dropbox_folder + "/" + path
+      changed_files.push(file)
+    end
+  end
+
   g.reset_hard("HEAD")
 
   changed_files.each do |file|
