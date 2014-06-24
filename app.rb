@@ -92,7 +92,7 @@ post "/hook/dropbox" do
       HTTParty.post(github_api_url, {
         body: {
             title: "[failure] automatic dropbox update #{Time.now.to_s}",
-            body: "```sh\n" + e.message + "```",
+            body: "```sh\n" + e.message + "\n```",
             labels: "generated"
         }.to_json,
         headers: {
